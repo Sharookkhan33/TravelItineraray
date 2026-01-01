@@ -1,6 +1,63 @@
-<nav>
-  <a routerLink="/">Home</a> |
-  <a routerLink="/cart">Cart</a>
+<nav class="navbar">
+  <div class="nav-container">
+
+    <!-- LOGO -->
+    <a routerLink="/" class="logo" (click)="isMenuOpen = false">
+      Travel Explorer
+    </a>
+
+    <!-- MOBILE MENU BUTTON -->
+    <button class="menu-btn" (click)="isMenuOpen = !isMenuOpen">
+      ☰
+    </button>
+
+    <!-- NAV LINKS -->
+    <ul class="nav-links" [class.open]="isMenuOpen">
+      <li>
+        <a routerLink="/" (click)="isMenuOpen = false" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          Home
+        </a>
+      </li>
+
+      <li>
+        <a href="#" (click)="isMenuOpen = false">About Us</a>
+      </li>
+
+      <li>
+        <a href="#" (click)="isMenuOpen = false">Contact</a>
+      </li>
+
+      <li>
+        <a routerLink="/cart" (click)="isMenuOpen = false" routerLinkActive="active">
+          Cart
+        </a>
+      </li>
+
+      <li>
+        <button class="signin-btn">Sign In</button>
+      </li>
+
+      <li>
+        <button class="signup-btn">Sign Up – It’s Free</button>
+      </li>
+    </ul>
+
+  </div>
 </nav>
 
-<router-outlet></router-outlet>
+<!-- Toast Container -->
+<div class="toast-container">
+  <div *ngFor="let toast of toasts" class="cart-toast">
+    <div class="toast-content" [ngClass]="toast.type">
+      <span class="toast-icon">
+        {{ toast.type === 'success' ? '✔' : toast.type === 'warning' ? '!' : '✖' }}
+      </span>
+      <span class="toast-text">{{ toast.message }}</span>
+      <button class="toast-close" (click)="removeToast(toast.id)">×</button>
+    </div>
+  </div>
+</div>
+
+<div class="page-content">
+  <router-outlet></router-outlet>
+</div>

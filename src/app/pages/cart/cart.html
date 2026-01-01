@@ -1,1 +1,46 @@
-<p>cart works!</p>
+<div class="cart-container">
+
+  <h2 class="cart-title">Cart & Summary</h2>
+
+  <div *ngIf="cartItems.length === 0" class="empty-cart">
+    🛒 Your cart is empty. Start exploring itineraries!
+  </div>
+
+<div class="cart-list">
+  <div *ngFor="let item of cartItems" class="cart-card">
+
+    <div class="card-left">
+      <img [src]="item.image" alt="{{ item.place }}" class="cart-image" />
+    </div>
+
+    <div class="card-right">
+
+      <div class="card-header">
+        <h3>{{ item.country }} - {{ item.place }}</h3>
+        <span class="price">₹{{ item.totalCost }}</span>
+      </div>
+
+      <div class="card-body">
+        <p><strong>Food:</strong> {{ item.food }}</p>
+        <p><strong>Hotel:</strong> {{ item.hotelType }} ({{ item.nights }} nights)</p>
+        <p><strong>Flight Charges:</strong> ₹{{ item.flightCharges }}</p>
+      </div>
+
+      <div class="card-actions">
+        <button class="remove-btn" (click)="removeItem(item.id)">
+          Remove
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+  <div *ngIf="cartItems.length > 0" class="cart-total">
+    <span>Grand Total</span>
+    <strong>₹{{ getTotalCost() }}</strong>
+  </div>
+
+</div>

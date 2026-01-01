@@ -1,1 +1,36 @@
-<p>itinerary-card works!</p>
+<div class="card" [class.compare-active]="data.isCompared">
+
+ <div class="compare-box">
+  <input
+    type="checkbox"
+    id="compare-{{ data.id }}"
+    (change)="toggleCompare()"
+    [checked]="data.isCompared"
+  />
+  <label for="compare-{{ data.id }}">Compare</label>
+</div>
+
+
+  <img [src]="data.image" alt="{{ data.place }}" />
+
+  <div class="card-body">
+    <h3>{{ data.country }} - {{ data.place }}</h3>
+
+    <p>{{ data.description }}</p>
+    <p><strong>Food:</strong> {{ data.food }}</p>
+    <p><strong>Activities:</strong> {{ data.activities.join(', ') }}</p>
+    <p><strong>Hotel:</strong> {{ data.hotelType }} ({{ data.nights }} nights)</p>
+    <p><strong>Flight:</strong> ₹{{ data.flightCharges }}</p>
+
+    <div class="price">Total: ₹{{ data.totalCost }}</div>
+
+    <button
+  (click)="addToCart()"
+  [disabled]="isAdded"
+  class="add-btn"
+  [class.disabled]="isAdded">
+  {{ isAdded ? 'Added' : 'Add to Cart' }}
+</button>
+
+  </div>
+</div>
